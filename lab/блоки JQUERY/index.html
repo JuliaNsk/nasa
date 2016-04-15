@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="jquery.min.js"></script>
+    <style>
+        body {
+            background: url("blocks.jpg");
+            background-size: cover;
+        }
+
+        .slide {
+            cursor: pointer;
+        }
+
+        #b1, #b2, #b3 {
+            height: 150px;
+            width: 360px;
+            background: url("background.jpg");
+            background-position: 50% 20%;
+            top: 50px;
+            position: absolute;
+            left: -360px;
+        }
+
+        #b2 {
+            top: 200px;
+            background-position: 50% 50%;
+        }
+
+        #b3 {
+            top: 350px;
+            background-position: 50% 80%;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+
+            var action = '-';
+            var slide = $(".slide");
+            var block = $(".block");
+
+            slide.on('click', function () {
+                if (!(block.is(':animated'))) {
+                    var counter = 1;
+                    var time = 600;
+
+                    if (action == '-') {
+                        slide.html('&#935; Close');
+                        action = '+';
+                    }
+                    else {
+                        slide.html('&#8594; Open');
+                        action = '-';
+                    }
+
+                    while (counter < (block.length + 1)) {
+                        $('#b' + counter).animate({left: action + '=360'}, time);
+                        counter++;
+                        time += 300
+                    }
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div class="slide" onselectstart="return false">&#8594; Open</div>
+
+<div id="b1" class="block"></div>
+<div id="b2" class="block"></div>
+<div id="b3" class="block"></div>
+</body>
+</html>

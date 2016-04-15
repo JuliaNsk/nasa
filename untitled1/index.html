@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        button {
+            margin: 4px;
+            cursor: pointer;
+        }
+
+        input {
+            margin: 4px;
+            color: blue;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <style type="text/css">
+        table {
+            border: 1px solid;
+        }
+
+        tr {
+        }
+
+        td, th {
+            border: 1px solid;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        .form {
+            background-color: rgba(0, 0, 255, 0.3);
+            width: 260px;
+            margin-left: 50%;
+            left: -120px;
+            position: relative;
+            padding: 20px;
+            border-radius: 50px;
+            color: yellow;
+            text-align: right;
+        }
+
+        .form input {
+            color: blue;
+            text-align: center;
+        }
+
+        body {
+            background: url("http://flag.kuda.ua/wp-content/uploads/2015/02/kuda.ua_.1.jpg");
+            background-size: cover;
+        }
+
+        .tables {
+            text-align: center;
+            text-align: -webkit-center;
+        }
+
+        .tableUmova {
+            background: rgba(255, 255, 255, 0.5);
+            margin-top: 25px;
+            text-align: center;
+
+        }
+
+        .tableUmova input {
+            width: 150px;
+        }
+
+        .vkladeniKoshty {
+            width: 100px;
+        }
+
+        .pidpr {
+            width: 150px;
+        }
+
+        th {
+            width: 20px;
+            text-align: center !important;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        .f1 {
+            background: rgba(255, 255, 255, 0.5);
+            margin-top: 15px;
+            text-align: center;
+            margin-left: 10px;
+        }
+
+        .tablesRes {
+            float: left;
+            margin-top: 3.5%;
+            text-align: center;
+            margin-left: 10px;
+        }
+
+        .results {
+            margin-top: 5%;
+            font-size: 18px;
+            margin-left: 50%;
+            color: #1F5080;
+        }
+
+        .max {
+            color: darkblue;
+            font-weight: bold;
+        }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="form">
+    <label for="factory">Кількість підприємств</label>
+    <input type="number" id="factory" value="4">
+    <br>
+    <label for="money">млн. грн.</label>
+    <input type="number" id="money" value="100">
+    <br>
+    <label for="step">Дискретність</label>
+    <input type="number" id="step" min="1" value="20">
+    <br>
+
+    <button id="createTable" class="btn btn-primary">Створити</button>
+</div>
+<div class="tables">
+    <table class="tableUmova">
+        <tr class="factoryNumber">
+            <td class="vkladeniKoshty">
+                Вкладені кошти
+            </td>
+        </tr>
+
+    </table>
+    <button id="getData" class="btn btn-primary">Розв'язання</button>
+</div>
+<script>
+    var step, money, factory;
+    minEl();
+    $("#createTable").one('click', function () {
+
+        step = ($("#step").val());
+        money = ($("#money").val());
+        factory = ($("#factory").val());
+        var moneyMass = [];
+        var rows = money / step + 1;
+        for (var i = 0; i < rows; i++) {
+            $("tbody").append("<tr class='title'><td>" + (i * step) + "</td></tr>");
+            eval("var point_" + i + "=[]")
+            moneyMass.push((i * step))
+        }
+
+        for (var i = 0; i < factory; i++) {
+            $(".factoryNumber").append("<td class='pidpr'>Підприємство " + (i + 1) + "</td>");
+            $(".title").append("<td><input type='number' class=" + i + " value=100></td>");
+            eval("var point_" + i + "=[]")
+        }
+        $("#getData").one('click', function () {
+            for (var i = 0; i < rows; i++) {
+                $("table").find(':input').each(function () {
+                    if ($(this).attr('class') == i) {
+                        eval("point_" + i).push($(this).val());
+                    }
+                });
+            }
+            $('body').append('<table class="tablesRes f1"><tr><th>Обсяг коливань</th><th>f1(x)</th><th>Умовно оптимальний розподіл</th></tr><tbody></tbody></table>')
+            for (var i = 0; i < rows; i++) {
+                $(".f1").append("<tr><td class='" + 'row' + i + "'>" + moneyMass[i] + "</td></tr>");
+                $(".row" + i).after("<td>" + moneyMass[i] + "</td>");
+                $(".row" + i).after("<td>" + point_0[i] + "</td>");
+            }
+            for (var i = 1; i < factory - 1; i++) {
+                $('table').last().after('<table class="tablesRes tableCountt' + (i + 1) + '"><tr><th>Обсяг коливань</th><th>f' + (i + 1) + '(x)</th><th>Умовно оптимальний розподіл</th></tr><tbody></tbody></table>')
+            }
+            var f1 = point_0;
+            for (var i = 2; i < factory; i++) {
+                eval("var f" + i + "=[]");
+                eval("var index" + i + "=[]");
+                for (var counter = 0; counter < rows; counter++) {
+                    eval("var x" + counter + "=[]");
+                    for (var j = 0; j < counter + 1; j++) {
+                        eval("x" + counter).push(eval('point_' + (i - 1))[j]);
+                    }
+                }
+                for (var counter = 0; counter < rows; counter++) {
+                    eval("var sum" + counter + "=[]");
+                    for (var t = 0; t < eval('x' + counter).length; t++) {
+                        eval('sum' + counter).push(parseInt(eval('x' + counter)[t]) + parseInt(eval('f' + (i - 1))[counter - t]))
+                    }
+                    var tttt = eval('sum' + counter);
+                    eval("f" + i).push(Math.max.apply(null, tttt));//push max
+                    eval('index' + i).push(tttt.indexOf(Math.max.apply(Math, tttt)))
+                }
+            }
+            for (var f = 2; f < factory; f++) {
+                $(".tableCountt" + f).append("<tr><td class='" + 'row0' + "'>" + 0 + "</td></tr>");
+                $(".tableCountt" + f + " .row0").after("<td class='" + 'row0' + " ft'>" + '0' + "</td>");//второй столбик
+
+                for (var i = 1; i < rows; i++) {
+                    $(".tableCountt" + f + "").append("<tr><td class='" + 'row' + i + "'>" + moneyMass[i] + "</td></tr>");
+                    $(".tableCountt" + f + " .row" + i).after("<td class='" + 'row' + i + " ft'>" + eval("f" + f)[i] + "</td>");//второй столбик
+                    $(".tableCountt" + f + " .row" + i + ".ft").after("<td class='" + 'row' + i + "'>" + moneyMass[eval("index" + f)[i]] + "</td>");//3 столбик
+                }
+            }
+            $(".row0.ft").after("<td class= row0>0</td>");//3 столбик
+            var nSum = [];
+            var reverse = eval("f" + (factory - 1)).reverse();
+            for (var counter = 0; counter < rows; counter++) {
+                nSum.push(parseInt(eval("point_" + ( factory - 1))[counter]) + parseInt(reverse[counter]));
+            }
+            var maxZindex = nSum.indexOf(Math.max.apply(Math, nSum));
+            $("table").last().after("<div class='results'></div>");
+            $(".results").html("<div class='max'>max Z = " + Math.max.apply(Math, nSum) + "</div><div>Підприємство " + factory + ' = ' + moneyMass[maxZindex] + "</div>");
+            money = money - moneyMass[maxZindex];
+            var index1;
+            for (var factor = factory - 1; factor > 0; factor--) {
+                if (typeof eval("index" + (factor)) == "undefined") {
+                    ref = money;
+                }
+                else {
+                    var ref = moneyMass[eval("index" + (factor))[moneyMass.indexOf(money)]];
+                    money = money - moneyMass[eval("index" + (factor))[moneyMass.indexOf(money)]];
+                }
+                $(".max").after("<div>Підприємство " + factor + ' = ' + ref + "</div>");
+            }
+        });
+        onlyNumber();
+    });
+    onlyNumber();
+    function onlyNumber() {
+        $("input").keydown(function (event) {
+            // Разрешаем: backspace, delete, tab и escape
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 ||
+                        // Разрешаем: Ctrl+A
+                    (event.keyCode == 65 && event.ctrlKey === true) ||
+                        // Разрешаем: home, end, влево, вправо
+                    (event.keyCode >= 35 && event.keyCode <= 39)) {
+                // Ничего не делаем
+                return;
+            }
+            else {
+                // Обеждаемся, что это цифра, и останавливаем событие keypress
+                if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                    event.preventDefault();
+                }
+            }
+        });
+    }
+    function minEl() {
+        $("input").change(function () {
+            if ($(this).val() < 1) {
+                $(this).val(1);
+            }
+        });
+    }
+    ;
+</script>
+</body>
+</html>

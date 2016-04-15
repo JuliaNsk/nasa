@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+
+<style type="text/css">
+    .tblCalc{
+        border:1px solid gray;
+        margin:0;
+        padding:0;
+        width:250px;
+        text-align:center;
+    }
+    .tblCalc input{
+        border:1px solid gray;
+        width:30px;
+        margin:4px;
+    }
+    #btnWide{
+        width:80px;
+    }
+    #editWide{
+        width:250px;
+    }
+</style>
+<script language="JavaScript">
+
+
+    var Fcalc = document.calc;
+    var Currents = 0;
+    var FlagNewNum = false;
+    var PendingOp = "";
+
+
+    // обработчик нажатия
+    // цифровой кнопки
+    function NumPressed (Num)
+    {
+        if (FlagNewNum)
+        {
+            Fcalc.ReadOut.value = Num;
+            FlagNewNum = false;
+        }
+        else
+        {
+            if (Fcalc.ReadOut.value == "0")
+                Fcalc.ReadOut.value = Num;
+            else
+                Fcalc.ReadOut.value += Num;
+        }
+    }
+
+    // обработчик нажатия
+    // кнопки действия
+    function Operation (Op)
+    {
+        var Readout = Fcalc.ReadOut.value;
+        if (FlagNewNum && PendingOp != "=")
+        {
+            Fcalc.ReadOut.value = Currents;
+        }
+        else
+        {
+            FlagNewNum = true;
+            if ( '+' == PendingOp )
+                Currents += parseFloat(Readout);
+            else if ( '-' == PendingOp )
+                Currents -= parseFloat(Readout);
+            else if ( '/' == PendingOp )
+                Currents /= parseFloat(Readout);
+            else if ( '*' == PendingOp )
+                Currents *= parseFloat(Readout);
+            else
+                Currents = parseFloat(Readout);
+            Fcalc.ReadOut.value = Currents;
+            PendingOp = Op;
+        }
+    }
+
+    // добавление десятичной точки с числу
+    function Decimal ()
+    {
+        var curReadOut = Fcalc.ReadOut.value;
+        if (FlagNewNum)
+        {
+            curReadOut = "0.";
+            FlagNewNum = false;
+        }
+        else
+        {
+            if (curReadOut.indexOf(".") == -1)
+                curReadOut += ".";
+        }
+        Fcalc.ReadOut.value = curReadOut;
+    }
+
+    // Очистка текущего результата
+    function ClearEntry ()
+    {
+        Fcalc.ReadOut.value = "0";
+        FlagNewNum = true;
+    }
+
+    // Полная очистка всех результатов
+    function Clear ()
+    {
+        Currents = 0;
+        PendingOp = "";
+        ClearEntry();
+
+    }
+
+
+
+    // меняем знак текущего результата
+    function Neg ()
+    {
+        Fcalc.ReadOut.value =
+                parseFloat(Fcalc.ReadOut.value) * -1;
+    }
+
+    // вычисляем значение процентов
+    function Percent ()
+    {
+        Fcalc.ReadOut.value =
+                (parseFloat(Fcalc.ReadOut.value) / 100) *
+                parseFloat(Currents);
+    }
+</script>
+
+<center>
+    <form method="post" name="form1">
+        <table bgColor="#7AA672">
+            <tbody>
+            <tr><td><table bgColor="#3D7733" border="1" cellPadding="0" cellSpacing="5">
+                <tbody>
+                <tr align="middle">
+                    <td colSpan="5" bgColor="#7AA672"><input name="ekran" value="0" size="20"></td></tr>
+                <tr align="middle">
+                    <td colSpan="4" bgColor="#7AA672"><b><font color="#FFFF00" size=3>Калькулятор</font></b></td>
+                    <td><input name="C" onclick="button(11,'C')" type="button" value=" C "></td></tr>
+                <tr align="middle">
+                    <td><input name="7" onclick="button(7 ,'')" type="button" value=" 7 "></td>
+                    <td><input name="8" onclick="button(8 ,'')" type="button" value=" 8 "></td>
+                    <td><input name="9" onclick="button(9 ,'')" type="button" value=" 9 "></td>
+                    <td><input name="/" onclick="button(11,'/')" type="button" value=" / "></td>
+                    <td><input name="sqrt" onclick="button(11,'sqrt')" type="button" value="sqrt"></td></tr>
+                <tr align="middle">
+                    <td><input name="4" onclick="button(4,'')" type="button" value=" 4 "></td>
+                    <td><input name="5" onclick="button(5,'')" type="button" value=" 5 "></td>
+                    <td><input name="6" onclick="button(6,'')" type="button" value=" 6 "></td>
+                    <td><input name="*" onclick="button(11,'*')" type="button" value=" * "></td>
+                    <td><input name="exp" onclick="button(11,'exp')" type="button" value="exp"></td></tr>
+                <tr align="middle">
+                    <td><input name="1" onclick="button(1,'')" type="button" value=" 1 "></td>
+                    <td><input name="2" onclick="button(2,'')" type="button" value=" 2 "></td>
+                    <td><input name="3" onclick="button(3,'')" type="button" value=" 3 "></td>
+                    <td><input name="-" onclick="button(11,'-')" type="button" value=" - "></td>
+                    <td><input name="1/x" onclick="button(11,'1/x')" type="button" value="1/x "></td></tr>
+                <tr align="middle">
+                    <td><input name="0" onclick="button(0,'')" type="button" value=" 0 "></td>
+                    <td><input name="+/-" onclick="button(11,'+/-')" type="button" value=" +/-"></td>
+                    <td><input name="." onclick="button(11,'.')" type="button" value=" , "></td>
+                    <td><input name="+" onclick="button(11,'+')" type="button" value=" + "></td>
+                    <td><input name="=" onclick="button(11,'=')" type="button" value=" = "></td>
+                </tr></tbody></table>
+            </td></tr></tbody></table>
+</center>
+</form>

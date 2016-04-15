@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'/>
+		<title></title>
+		<link rel="stylesheet" href="colorbox.css" />
+		<script src="jquery.min.js"></script>
+		<script src="jquery.colorbox.js"></script>
+		<style>
+			body{
+				background: url("blocks.jpg");
+			}
+			.lightbox{
+				color: white;
+			}
+		</style>
+		<script>
+			$(document).ready(function(){
+				$(".lightbox").colorbox({rel:'lightbox', transition:'elastic', speed:350, escKey:false, maxWidth:'360px', maxHeight:'600px'});
+				
+			});
+		</script>
+	</head>
+	<body>
+		<p><a class="lightbox" href="background.jpg" title="Photo">Open</a></p>
+		
+	</body>
+</html>

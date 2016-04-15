@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    #centralElement{
+        background-color: #1F5080;
+        width: 50%;
+        margin-left: 50px;
+        color: white;
+    }
+
+    p:first-child:after{
+        content: '';
+        height: 64px;
+        background-color: antiquewhite;
+        width: 10%;
+        float: right;
+
+    }
+    p:first-child:before{
+        content: '';
+        height: 64px;
+        background-color: antiquewhite;
+        width: 10%;
+
+        float: left;
+    }
+    p:last-child:after{
+        content: '';
+        height: 64px;
+        display: inline-block;
+        background-color: antiquewhite;
+        width: 10%;
+        float: right;
+    }
+    p:last-child:before{
+        content: '';
+        height: 64px;
+        display: inline-block;
+        background-color: antiquewhite;
+        width: 10%;
+        float: left;
+    }
+</style>
+<body>
+<div id="centralElement">
+
+    <p>texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+   texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+    texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</p>
+    <p>texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+   texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+    texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</p>
+    <p>texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+   texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+    texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table {
+            border: solid 3px;
+            border-left: hidden;
+            border-right: hidden;
+            border-collapse: collapse;
+            font-size: 10pt;
+        }
+
+        .borderTRB {
+            border: solid 3px;
+        }
+
+        .borderThinTB {
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+        .borderThickB {
+            border-bottom: solid 3px;
+        }
+
+        .borderThinB {
+            border-bottom: solid 1px;
+        }
+
+        .borderThickR {
+            border-right: solid 3px;
+        }
+
+        .borderThinR {
+            border-right: solid 1px;
+        }
+
+        .textRight {
+            text-align: right;
+        }
+
+        .textCenter {
+            text-align: center;
+        }
+
+        .subjectHead {
+            height: 100px;
+        }
+
+        .headerLeftWidth {
+            width: 250px;
+            height: 60px;
+        }
+
+        .subjectWidth {
+            width: 20px;
+        }
+
+        .borderDashedR {
+            border-right-style: dashed;
+        }
+
+        .noteWidth {
+            width: 100px;
+        }
+
+        .weekWidth {
+            width: 80px;
+            height: 25px;
+        }
+
+        .semesterWidth {
+            width: 110px;
+        }
+
+        .textVertical {
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+
+        .borderThinRTB {
+            border-right: solid 1px;
+            border-top: solid 1px;
+            border-bottom: solid 1px;
+        }
+
+        .borderThinRB {
+            border-right: solid 1px;
+            border-bottom: solid 1px;
+        }
+
+        .borderThickRThinB {
+            border-right: solid 3px;
+            border-bottom: solid 1px;
+        }
+        .borderThickBR{
+            border-bottom: solid 3px;
+            border-right: solid 3px;
+        }
+        .textPadding {
+            padding-left: 10px;
+        }
+        .borderThickBThinR{
+            border-bottom: solid 3px;
+            border-right: solid 1px;
+        }
+        .absent{
+            height: 40px;
+        }
+        .signature{
+            height: 70px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tbody>
+
+    <tr>
+        <td colspan="2" rowspan="2" class="borderTRB headerLeftWidth textPadding">II. Облік проведення занять<br>Та їх відвідування</td>
+        <td class="borderThickR subjectWidth"></td>
+        <td class="borderThinR subjectWidth"></td>
+        <td class="borderThinR subjectWidth"></td>
+        <td class="borderThinR subjectWidth"></td>
+        <td class="borderThinR subjectWidth"></td>
+        <td class="borderThinR subjectWidth"></td>
+        <td class="borderThinR subjectWidth"></td>
+        <td class="borderThinR subjectWidth"></td>
+        <td class="borderThickR subjectWidth"></td>
+        <td colspan="4" class="borderThickRThinB textCenter">Тиждень №_________</td>
+        <td rowspan="4" class="noteWidth textCenter borderThinB">Для нотаток</td>
+    </tr>
+
+    <tr>
+        <td class="borderThickR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td colspan="4" class="borderThinRB textCenter">Пропущ. занять(годин)</td>
+    </tr>
+
+    <tr>
+        <td colspan="2" rowspan="2" class="textRight subjectHead ">Навчальна дисипліна,<br>викладач, вид заняття</td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td colspan="2" class="borderThinRB weekWidth textCenter">за тиждень</td>
+        <td colspan="2" class="borderThinRB semesterWidth textCenter">від початку сем.</td>
+    </tr>
+
+    <tr>
+        <td class="borderThickR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR "></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinRB textVertical">усього</td>
+        <td class="borderThinRB textVertical">з непов. <br>причини</td>
+        <td class="borderThinRB textVertical">усього</td>
+        <td class="borderThickRThinB textVertical">з непов. <br>причини</td>
+    </tr>
+
+    <tr>
+        <td rowspan="2" class="borderTRB textPadding">№ <br>з/п</td>
+        <td rowspan="2" class="borderTRB textCenter">Прізвище та ініціали<br> студентів</td>
+        <td class="borderThinTB textCenter borderThickR ">Аудит.</td>
+        <td colspan="2" class="borderThinRTB"></td>
+        <td colspan="2" class="borderThinRTB"></td>
+        <td colspan="2" class="borderThinRTB"></td>
+        <td colspan="2" class="borderThickR borderThinTB"></td>
+        <td class="borderThinRB"></td>
+        <td class="borderThinRB"></td>
+        <td class="borderThinRB"></td>
+        <td class="borderThickRThinB"></td>
+        <td class=" borderThinB"></td>
+    </tr>
+
+    <tr>
+        <td class="borderThickBR textCenter">Дата</td>
+        <td colspan="8" class="borderThickBR textCenter">Пн.</td>
+        <td class="borderThickBThinR"></td>
+        <td class="borderThickBThinR"></td>
+        <td class="borderThickBThinR"></td>
+        <td class="borderThickBR"></td>
+        <td class="borderThickB"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThinB">
+        <td class="borderThickR textPadding">1.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThinB borderThickR">
+        <td class="borderThickR textPadding">2.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThinB">
+        <td class="borderThickR textPadding">3.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR "></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThinB">
+        <td class="borderThickR textPadding">4.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThinB">
+        <td class="borderThickR textPadding">5.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR "></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThinB">
+        <td class="borderThickR textPadding">6.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR "></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThinB">
+        <td class="borderThickR textPadding">7.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR "></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThickB">
+        <td class="borderThickR textPadding">8.</td>
+        <td></td>
+        <td class="borderThickR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR borderDashedR"></td>
+        <td class="borderThickR "></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+
+    <tr class="borderThickB">
+        <td colspan="3" class="borderThickR textPadding absent"> Усього відсутніх<br>(запізнилося)</td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td colspan="6" class="borderThinR ">Пропусків <br>у групі</td>
+    </tr>
+
+    <tr>
+        <td colspan="3" class="borderThickR textPadding signature"> Підписи викладача<br>і старости</td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThinR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThickR"></td>
+        <td class="borderThickR"></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

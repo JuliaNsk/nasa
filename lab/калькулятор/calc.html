@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    input[type=button]{
+        background-image: url("g.jpg");
+color: white;
+        font-weight: 900;
+    }
+    body {
+        background: url("colorful-triangles-background_ret_sml-900x500.jpg");
+        background-size: cover;
+    }
+
+    #calc {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 5px solid beige;
+       background-image: url("calc.jpg");
+        background-size: contain;
+        height: 325px;
+        border-radius: 20px;
+    }
+
+    #number {
+        position: relative;
+        left: 2px;
+        top: 5%;
+        height: 35px;
+        color: black;
+        font-size: 21px;
+        text-align: right;
+        display: block;
+        margin: 0 auto;
+        width: 90%;
+        border-radius: 20px;
+        outline: none;
+        padding: 0 10px;
+    }
+
+    #engineer, #m {
+        margin-top: 5%;
+        margin-left: 3%;
+        display: inline-block;
+        float: left;
+    }
+
+    input[type=button] {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+        outline: none;
+    }
+
+    #clearButtons {
+        margin-top: 4%;
+        margin-right: 5%;
+    }
+
+    #clearButtons input[type=button] {
+        float: right;
+        width: 80px;
+        margin-right: 5px;
+        outline: none;
+
+    }
+
+    input[type=button] {
+        cursor: pointer;
+    }
+
+    #basicButtons {
+        float: right;
+        margin-right: 6%;
+    }
+
+    #basicButtons input[type=button] {
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+</style>
+<script>
+    var alreadyClick = false;
+    var c, op = [], r = undefined;
+    var variable = 0;
+
+    function numbersClick(number) {
+        if (alreadyClick == false) {
+            document.getElementById('number').value = number;
+            alreadyClick = true;
+        }
+        else {
+            document.getElementById('number').value += number;
+        }
+    }
+
+    function operation(val) {
+        c = parseFloat(document.getElementById('number').value);
+        if (r == undefined) {
+            r = c
+        }
+        else {
+            switch (op.pop()) {
+                case '+':
+                    r = r + c;
+                    break;
+                case '-':
+                    r = r - c;
+                    break;
+                case '*':
+                    r = r * c;
+                    break;
+                case '/':
+                    r = r / c;
+                    break;
+                case 'x^y':
+                    r = Math.pow(r, c);
+                    break;
+                case 'Mod':
+                    r = r % c;
+                    break;
+                case 'And':
+                    r = r & c;
+                    break;
+                case 'Or':
+                    r = r | c;
+                    break;
+                case 'Xor':
+                    r = r ^ c;
+                    break;
+                case 'Lsh':
+                    r = r << c;
+                    break;
+            }
+
+            document.getElementById('number').value = r
+        }
+
+        if (val == '=') {
+            op = [];
+            r = undefined
+        }
+
+        op.push(val);
+        alreadyClick = false;
+
+    }
+
+    function singleOperation(value) {
+        var fild = document.getElementById('number');
+
+        switch (value) {
+            case '+/-':
+                fild.value = parseFloat(fild.value) * (-1);
+                break;
+            case 'sin':
+                fild.value = Math.sin(parseFloat(fild.value));
+                break;
+            case 'cos':
+                fild.value = Math.cos(parseFloat(fild.value));
+                break;
+            case 'tg':
+                fild.value = Math.tan(parseFloat(fild.value));
+                break;
+            case 'x^2':
+                fild.value = Math.pow(parseFloat(fild.value), 2);
+                break;
+            case 'x^3':
+                fild.value = Math.pow(parseFloat(fild.value), 3);
+                break;
+            case 'log':
+                fild.value = Math.log10(parseFloat(fild.value));
+                break;
+            case 'ln':
+                fild.value = Math.log(parseFloat(fild.value));
+                break;
+            case '1/x':
+                fild.value = 1 / (parseFloat(fild.value));
+                break;
+            case 'Int':
+                fild.value = Math.floor(parseFloat(fild.value));
+                break;
+            case 'pi':
+                fild.value = Math.PI;
+                break;
+            case 'Exp':
+                fild.value = Math.exp(fild.value);
+                break;
+            case 'n!':
+            function factorial(n) {
+                return (n != 1) ? n * factorial(n - 1) : 1;
+            }
+                fild.value = factorial(fild.value);
+                break;
+            case 'Not':
+                fild.value = ~(fild.value);
+                break;
+            case '.':
+                if(fild.value.indexOf('.')<1){
+                    alreadyClick = true;
+                    fild.value += '.';
+                }
+                break;
+            case 'MS': variable = fild.value;
+                break;
+            case 'MR': fild.value = variable;
+                break;
+            case 'MC': variable = 0;
+                break;
+            case 'M+': variable+= parseFloat(fild.value);
+                break;
+            case 'C': r = undefined; op=[]; fild.value = 0; alreadyClick=false;
+                break;
+            case 'CE': fild.value = 0; alreadyClick=false;
+                break;
+            case 'Backspace': fild.value = fild.value.substring(0, fild.value.length - 1);
+                break;
+        }
+    }
+
+
+    //первым не может быть 0
+</script>
+<body>
+<div id="calc">
+    <input type="text" id="number" name="number" value="0"/>
+
+    <div id="engineer">
+        <input type="button" value="Exp" onclick="singleOperation(value)"/>
+        <input type="button" value="ln" onclick="singleOperation(value)"/>
+        <br>
+        <input type="button" value="sin" onclick="singleOperation(value)"/>
+        <input type="button" value="x^y" onclick="operation(value)"/>
+        <input type="button" value="log" onclick="singleOperation(value)"/>
+        <br>
+        <input type="button" value="cos" onclick="singleOperation(value)"/>
+        <input type="button" value="x^3" onclick="singleOperation(value)"/>
+        <input type="button" value="n!" onclick="singleOperation(value)"/>
+        <br>
+        <input type="button" value="tg" onclick="singleOperation(value)"/>
+        <input type="button" value="x^2" onclick="singleOperation(value)"/>
+        <input type="button" value="1/x" onclick="singleOperation(value)" />
+        <br>
+    </div>
+    <div id="m">
+        <input type="button" value="MC" onclick="singleOperation(value)"/>
+        <br>
+        <input type="button" value="MR" onclick="singleOperation(value)"/>
+        <br>
+        <input type="button" value="MS" onclick="singleOperation(value)" />
+        <br>
+        <input type="button" value="M+" onclick="singleOperation(value)"/>
+        <br>
+        <input type="button" value="pi" onclick="singleOperation(value)"/>
+    </div>
+    <div id="clearButtons">
+        <input type="button" value="C" onclick="singleOperation(value)" />
+        <input type="button" value="CE" onclick="singleOperation(value)" />
+        <input type="button" value="Backspace" onclick="singleOperation(value)" />
+    </div>
+    <div id="basicButtons">
+        <input type="button" value="7" onclick="numbersClick(value)" />
+        <input type="button" value="8" onclick="numbersClick(value)"/>
+        <input type="button" value="9" onclick="numbersClick(value)"/>
+        <input type="button" value="/" onclick="operation(value)"/>
+        <input type="button" value="Mod" onclick="operation(value)"/>
+        <input type="button" value="And" onclick="operation(value)"/>
+        <br>
+        <input type="button" value="4" onclick="numbersClick(value)"/>
+        <input type="button" value="5" onclick="numbersClick(value)"/>
+        <input type="button" value="6" onclick="numbersClick(value)"/>
+        <input type="button" value="*" onclick="operation(value)"/>
+        <input type="button" value="Or" onclick="operation(value)"/>
+        <input type="button" value="Xor" onclick="operation(value)"/>
+        <br>
+        <input type="button" value="1" onclick="numbersClick(value)"/>
+        <input type="button" value="2" onclick="numbersClick(value)"/>
+        <input type="button" value="3" onclick="numbersClick(value)"/>
+        <input type="button" value="-" onclick="operation(value)" />
+        <input type="button" value="Lsh" onclick="operation(value)"/>
+        <input type="button" value="Not" onclick="singleOperation(value)"/>
+        <br>
+        <input type="button" value="0" onclick="numbersClick(value)" />
+        <input type="button" value="+/-" onclick="singleOperation(value)" />
+        <input type="button" value="." onclick="singleOperation(value)"/>
+        <input type="button" value="+" onclick="operation(value)"/>
+        <input type="button" value="=" onclick="operation(value)"/>
+        <input type="button" value="Int" onclick="singleOperation(value)" />
+    </div>
+
+</div>
+</body>
+</html>

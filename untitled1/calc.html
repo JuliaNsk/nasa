@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    body {
+        background: url("colorful-triangles-background_ret_sml-900x500.jpg");
+        background-size: cover;
+    }
+
+    #calc {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 5px solid beige;
+        background: rgba(179, 220, 237, 1);
+        background: -moz-linear-gradient(45deg, rgba(179, 220, 237, 1) 0%, rgba(41, 184, 229, 1) 50%, rgba(188, 224, 238, 1) 100%);
+        background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(179, 220, 237, 1)), color-stop(50%, rgba(41, 184, 229, 1)), color-stop(100%, rgba(188, 224, 238, 1)));
+        background: -webkit-linear-gradient(45deg, rgba(179, 220, 237, 1) 0%, rgba(41, 184, 229, 1) 50%, rgba(188, 224, 238, 1) 100%);
+        background: -o-linear-gradient(45deg, rgba(179, 220, 237, 1) 0%, rgba(41, 184, 229, 1) 50%, rgba(188, 224, 238, 1) 100%);
+        background: -ms-linear-gradient(45deg, rgba(179, 220, 237, 1) 0%, rgba(41, 184, 229, 1) 50%, rgba(188, 224, 238, 1) 100%);
+        background: linear-gradient(45deg, rgba(179, 220, 237, 1) 0%, rgba(41, 184, 229, 1) 50%, rgba(188, 224, 238, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=1);
+        height: 325px;
+        border-radius: 20px;
+    }
+
+    #number {
+        position: relative;
+        left: 2px;
+        top: 5%;
+        height: 35px;
+        color: black;
+        font-size: 21px;
+        text-align: right;
+        display: block;
+        margin: 0 auto;
+        width: 90%;
+        border-radius: 20px;
+        outline: none;
+        padding: 0 10px;
+    }
+
+    #engineer, #m {
+        margin-top: 5%;
+        margin-left: 3%;
+        display: inline-block;
+        float: left;
+    }
+
+    input[type=button] {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+        outline: none;
+    }
+
+    #clearButtons {
+        margin-top: 4%;
+        margin-right: 5%;
+    }
+
+    #clearButtons input[type=button] {
+        float: right;
+        width: 80px;
+        margin-right: 5px;
+        outline: none;
+
+    }
+
+    input[type=button] {
+        cursor: pointer;
+    }
+
+    #basicButtons {
+        float: right;
+        margin-right: 6%;
+    }
+
+    #basicButtons input[type=button] {
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+</style>
+<script>
+    var alreadyClick = false;
+    var sum = 0;
+    var operand, inputNumber = null, typedNumber;
+
+    function numbersClick(number) {
+        if ((alreadyClick == false) || (inputNumber !== null)) {
+            document.getElementById('number').value = number;
+            alreadyClick = true;
+
+        }
+        else {
+            document.getElementById('number').value += number;
+        }
+
+    }
+
+    function clearButtonClick(clearType) {
+        switch (clearType) {
+            case 'CE':
+                document.getElementById('number').value = '';
+                break;
+            case 'C':
+                sum = 0;
+                document.getElementById('number').value = '0';
+                alreadyClick = false;
+                break;
+            case 'Backspace':
+                document.getElementById('number').value = document.getElementById('number').value.substring(0, document.getElementById('number').value.length - 1);
+                break;
+        }
+    }
+
+    function basicClick(operation) {
+        if (inputNumber == null) {
+            inputNumber = parseFloat(document.getElementById('number').value);
+            operand = operation;
+            console.log(inputNumber);
+        }
+        else {
+            result();
+        }
+
+        switch (operand) {
+            case '+/-':
+                document.getElementById('number').value *= -1;
+                break;
+            case 'sin':
+                document.getElementById('number').value = Math.sin(inputNumber);
+                break;
+            case 'cos':
+                document.getElementById('number').value = Math.cos(inputNumber);
+                break;
+            case 'tg':
+                document.getElementById('number').value = Math.tan(inputNumber);
+                break;
+            case 'x^3':
+                document.getElementById('number').value = Math.pow(inputNumber, 3);
+                break;
+            case 'x^2':
+                document.getElementById('number').value = Math.pow(inputNumber, 2);
+                break;
+            case 'ln':
+                document.getElementById('number').value = Math.log(inputNumber);
+                break;
+            case 'log':
+                document.getElementById('number').value = Math.log10(inputNumber);
+                break;
+            case '1/x':
+                document.getElementById('number').value = (1 / inputNumber);
+                break;
+        }
+    }
+
+    function result() {
+
+        typedNumber = parseFloat(document.getElementById('number').value);
+        switch (operand) {
+            case '+':
+                sum = inputNumber + typedNumber;
+                break;
+            case '-':
+                sum = inputNumber - typedNumber;
+                break;
+            case '*':
+                sum = inputNumber * typedNumber;
+                break;
+            case '/':
+                sum = inputNumber / typedNumber;
+                break;
+        }
+        console.log(typedNumber);
+        console.log(sum);
+        inputNumber = null;
+        document.getElementById('number').value = (sum)
+    }
+
+</script>
+<body>
+<div id="calc">
+    <input type="text" id="number" name="number" value="0"/>
+
+    <div id="engineer">
+        <input type="button" value="Exp"/>
+        <input type="button" value="ln" onclick="basicClick(value)" style="background-color: coral"/>
+        <br>
+        <input type="button" value="sin" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="x^y"/>
+        <input type="button" value="log" onclick="basicClick(value)" style="background-color: coral"/>
+        <br>
+        <input type="button" value="cos" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="x^3" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="n!"/>
+        <br>
+        <input type="button" value="tg" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="x^2" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="1/x" onclick="basicClick(value)" style="background-color: coral"/>
+        <br>
+    </div>
+    <div id="m">
+        <input type="button" value="MC"/>
+        <br>
+        <input type="button" value="MR"/>
+        <br>
+        <input type="button" value="MS"/>
+        <br>
+        <input type="button" value="M+"/>
+        <br>
+        <input type="button" value="pi"/>
+    </div>
+    <div id="clearButtons">
+        <input type="button" value="C" onclick="clearButtonClick(value)" style="background-color: coral"/>
+        <input type="button" value="CE" onclick="clearButtonClick(value)" style="background-color: coral"/>
+        <input type="button" value="Backspace" onclick="clearButtonClick(value)" style="background-color: coral"/>
+    </div>
+    <div id="basicButtons">
+        <input type="button" value="7" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="8" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="9" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="/" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="Mod"/>
+        <input type="button" value="And"/>
+        <br>
+        <input type="button" value="4" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="5" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="6" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="*" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="Or"/>
+        <input type="button" value="Xor"/>
+        <br>
+        <input type="button" value="1" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="2" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="3" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="-" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="Lsn"/>
+        <input type="button" value="Not"/>
+        <br>
+        <input type="button" value="0" onclick="numbersClick(value)" style="background-color: coral"/>
+        <input type="button" value="+/-" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="."/>
+        <input type="button" value="+" onclick="basicClick(value)" style="background-color: coral"/>
+        <input type="button" value="=" onclick="result()" style="background-color: coral"/>
+        <input type="button" value="Int"/>
+    </div>
+
+</div>
+</body>
+</html>
